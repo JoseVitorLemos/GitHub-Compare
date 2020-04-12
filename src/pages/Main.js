@@ -12,14 +12,18 @@ const Main = () => {
     mapear: false
   })
 
-  // console.log(state.repositoryInput)
-  // console.log(state.mapear)
+  console.log(state.repositoryInput)
+  console.log(state.mapear)
 
   const handleAddRepository = async (event) => {
-    event.preventDefault()
+    // event.preventDefault()
 
     try {
       const response = await api.get(`/repos/${state.repositoryInput}`)
+      setState({
+        repositoryInput: '',
+        repositories: [...state.repositories, response.data]
+      })
       setState({ mapear: true })
       console.log(response)
     } catch (err) {
@@ -31,7 +35,7 @@ const Main = () => {
     <Container>
       <img src={Logo} alt="Github Compare" />
 
-      <Form onSubmit={handleAddRepository}>
+      <Form onSubmit={handleAddRepository()}>
         <input
           type="text"
           placeholder="usuário/repositório"
