@@ -12,8 +12,8 @@ const Main = () => {
     mapear: false
   })
 
-  console.log(state.repositoryInput)
-  console.log(state.mapear)
+  // console.log(state.repositoryInput)
+  // console.log(state.mapear)
 
   const handleAddRepository = async (event) => {
     event.preventDefault()
