@@ -1,52 +1,48 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
+import api from '../services/api'
 import Logo from '../assets/logo.png'
 import { Container } from '../components/container'
 import { Form } from '../components/form'
 import CompareList from '../components/ComperList'
-import api from '../services/api'
 
-const Main = () => {
-  const [state, setState] = useState({
+export default class Main extends Component {
+  state = {
     repositoryInput: '',
     repositories: [],
-    mapear: false
-  })
+  }
 
-  console.log(state.repositoryInput)
-  console.log(state.mapear)
-
-  const handleAddRepository = async (event) => {
-    // event.preventDefault()
+  handleAddRepository = async (event) => {
+    event.preventDefault()
 
     try {
-      const response = await api.get(`/repos/${state.repositoryInput}`)
-      setState({
+      const response = await api.get(`/repos/${this.state.repositoryInput}`)
+      this.setState({
         repositoryInput: '',
-        repositories: [...state.repositories, response.data]
+        repositories: [...this.state.repositories, response.data]
       })
-      setState({ mapear: true })
-      console.log(response)
     } catch (err) {
       console.log(err)
     }
   }
 
-  return (
-    <Container>
-      <img src={Logo} alt="Github Compare" />
+  render() {
+    return (
+      <Container>
+        <img src={Logo} alt="Github Compare" />
 
-      <Form onSubmit={handleAddRepository()}>
-        <input
-          type="text"
-          placeholder="usuário/repositório"
-          value={state.repositoryInput}
-          onChange={event => setState({ repositoryInput: event.target.value })}
-        />
-        <button type="submit">OK</button>
-      </Form>
-      <CompareList repositories={state.repositories} mapear={state.mapear} />
-    </Container>
-  )
+        <Form onSubmit={this.handleAddRepository}>
+          <input
+            type="text"
+            placeholder="usuário/repositório"
+            value={this.state.repositoryInput}
+            onChange={event => this.setState({ repositoryInput: event.target.value })}
+          />
+          <button type="submit">OK</button>
+        </Form>
+
+        <CompareList repositories={this.state.repositories} />
+      </Container>
+    )
+  }
 }
 
-export default Main

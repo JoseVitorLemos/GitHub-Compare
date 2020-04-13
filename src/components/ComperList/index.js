@@ -3,9 +3,9 @@ import { Container, Repository } from './styles'
 import propTypes from 'prop-types'
 
 
-const CompareList = ({ repositories, mapear }) => (
+const CompareList = ({ repositories }) => (
 	<Container>
-		{mapear === true ? repositories.map(repository => (
+		{repositories.map(repository => (
 			<Repository key={repository.id}>
 				<header>
 					<img src={repository.owner.avatar_url} alt={repository.owner.login} />
@@ -28,7 +28,7 @@ const CompareList = ({ repositories, mapear }) => (
 					</li>
 				</ul>
 			</Repository>
-		)) : ''}
+		))}
 	</Container>
 )
 
