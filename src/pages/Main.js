@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import api from '../services/api'
-import Logo from '../assets/logo.png'
+import Logo from './logo.png'
 import { Container } from '../components/container'
 import { Form } from '../components/form'
 import CompareList from '../components/ComperList'
